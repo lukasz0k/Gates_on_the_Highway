@@ -6,7 +6,7 @@ def generate_vehicle_key():
     return f"{random.choice(string.ascii_uppercase)}" \
            f"{random.choice(string.ascii_uppercase)}" \
            f"{random.choice(string.ascii_uppercase)}" \
-           f"{random.randint(1000, 9999)}" \
+           f"{str(random.randint(0, 9999)).zfill(4)}" \
            f"{random.choice(string.ascii_uppercase)}" \
            f"{random.choice(string.ascii_uppercase)}"
 
