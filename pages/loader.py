@@ -1,4 +1,5 @@
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QPushButton, QLineEdit, QFileDialog
+from process.loadAndValidate import LoadInputsData
 
 class FileLoader(QWidget):
     def __init__(self, update_console_callback, parent=None):
@@ -50,14 +51,20 @@ class FileLoader(QWidget):
         self.setLayout(layout)
 
     def browse_file_logs(self):
-        file_namee_logs, _ = QFileDialog.getOpenFileName(self, 'Open File', '', 'Text Files (*.txt)')
-        if file_namee_logs:
-            self.path_edit_logs.setText(file_namee_logs)
+        file_name_logs, _ = QFileDialog.getOpenFileName(self, 'Open File', '', 'Text Files (*.txt)')
+        if file_name_logs:
+            self.path_edit_logs.setText(file_name_logs)
 
     def load_file_logs(self):
         file_path_logs = self.path_edit_logs.text()
-        print(f'Loading file from: {file_path_logs}')
-        self.update_console("Data loaded successfully.")
+        try:
+            loader = LoadInputsData()
+            if loader.loadLogs(file_path_logs):
+                print(f'File {file_path_logs} loaded and verified successfully')
+                self.update_console(f'File {file_path_logs} loaded and verified successfully')
+        except Exception as e:
+            print(f"An error occurred: {e}")
+            self.update_console(f"An error occurred: {e}")
 
     def browse_file_threads(self):
         file_name_threads, _ = QFileDialog.getOpenFileName(self, 'Open File', '', 'Text Files (*.txt)')
@@ -66,8 +73,14 @@ class FileLoader(QWidget):
 
     def load_file_threads(self):
         file_path_threads = self.path_edit_threads.text()
-        print(f'Loading file from: {file_path_threads}')
-        self.update_console("Data loaded successfully.")
+        try:
+            loader = LoadInputsData()
+            if loader.loadLogs(file_path_threads):
+                print(f'File {file_path_threads} loaded and verified successfully')
+                self.update_console(f'File {file_path_threads} loaded and verified successfully')
+        except Exception as e:
+            print(f"An error occurred: {e}")
+            self.update_console(f"An error occurred: {e}")
 
     def load_database(self):
         print(f'Loading file from database')
