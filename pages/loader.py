@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QPushButton, QLineEdit
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QPushButton, QLineEdit, QFileDialog
 
 class FileLoader(QWidget):
     def __init__(self, update_console_callback, parent=None):
@@ -52,20 +52,20 @@ class FileLoader(QWidget):
     def browse_file_logs(self):
         file_namee_logs, _ = QFileDialog.getOpenFileName(self, 'Open File', '', 'Text Files (*.txt)')
         if file_namee_logs:
-            self.path_edit.setText(file_namee_logs)
+            self.path_edit_logs.setText(file_namee_logs)
 
     def load_file_logs(self):
-        file_path_logs = self.path_edit.text()
+        file_path_logs = self.path_edit_logs.text()
         print(f'Loading file from: {file_path_logs}')
         self.update_console("Data loaded successfully.")
 
     def browse_file_threads(self):
         file_name_threads, _ = QFileDialog.getOpenFileName(self, 'Open File', '', 'Text Files (*.txt)')
         if file_name_threads:
-            self.path_edit.setText(file_name_threads)
+            self.path_edit_threads.setText(file_name_threads)
 
     def load_file_threads(self):
-        file_path_threads = self.path_edit.text()
+        file_path_threads = self.path_edit_threads.text()
         print(f'Loading file from: {file_path_threads}')
         self.update_console("Data loaded successfully.")
 
